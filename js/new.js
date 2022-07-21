@@ -14,7 +14,6 @@
 
 'use strict';
 
-// const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
 
 const personalMovieDB = {
     count: 0,
@@ -24,31 +23,51 @@ const personalMovieDB = {
     privat: false
 };
 
-personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
-
-for (let i = 0; i < 2; i++) {
-    const a = prompt('Один из последних просмотренных фильмов?', ''),
-          b = prompt('На сколько оцените его?', '');
-
-    if (a != null && b != null && a != '' && b != '' && a.length < 50) {
-        personalMovieDB.movies[a] = b;
-        console.log('done');
-    } else {
-        console.log('error');
-        i--;
+function start() {
+    let numOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+    while(numOfFilms == '' || numOfFilms == null || isNaN(numOfFilms)) {
+        numOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
     }
+    return numOfFilms;
+}
 
+personalMovieDB.count = start();
+
+function rememberMyFilms() {
+    for (let i = 0; i < 2; i++) {
+        const a = prompt('Один из последних просмотренных фильмов?', ''),
+              b = prompt('На сколько оцените его?', '');
     
+        if (a != null && b != null && a != '' && b != '' && a.length < 50) {
+            personalMovieDB.movies[a] = b;
+            console.log('done');
+        } else {
+            console.log('error');
+            i--;
+        }
+    }
 }
 
-if (personalMovieDB.count < 10) {
-    console.log('Просмотрено довольно мало фильмов');
-} else if (30 >= personalMovieDB.count && personalMovieDB.count >= 10) {
-    console.log('Вы классический зритель');
-} else if (personalMovieDB.count > 30) {
-    console.log('Вы киноман');
-} else {
-    console.log('Произошла ошибка');
+rememberMyFilms();
+
+
+
+function detectPersonalLevel() {
+    if (personalMovieDB.count < 10) {
+        console.log('Просмотрено довольно мало фильмов');
+    } else if (30 >= personalMovieDB.count && personalMovieDB.count >= 10) {
+        console.log('Вы классический зритель');
+    } else if (personalMovieDB.count > 30) {
+        console.log('Вы киноман');
+    } else {
+        console.log('Произошла ошибка');
+    }
 }
+
+detectPersonalLevel();
+
+// function showMyDB(hidden) {
+
+// }
 
 console.log(personalMovieDB);

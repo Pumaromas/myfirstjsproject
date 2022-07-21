@@ -47,7 +47,25 @@
 
 // ----------------------------------
 
-showFirstMessage();
-function showFirstMessage() {
-    console.log('Hello, world!');
+// showFirstMessage();
+// function showFirstMessage() {
+//     console.log('Hello, world!');
+// }
+
+// -----------------------------------
+
+function getMathResult(a, b) {
+    if (typeof(b) !== 'number' || b <= 0) {
+        return a;
+    }
+    let c = a;
+    let ans = `${c}`;
+    while (b != 1) {
+        c += a;
+        ans += `---${c}`;
+        b--;
+    }
+    return ans;
 }
+
+console.log(getMathResult(10, -5));
